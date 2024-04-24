@@ -1,0 +1,90 @@
+@charset "UTF-8";
+html,
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+fieldset,
+p,
+span,
+input,
+textarea,
+select,
+button,
+th,
+td,
+blockquote,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure {
+	margin: 0;
+	padding: 0;
+	vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: inherit;
+	font-weight: 400;
+}
+
+ul,
+ol,
+li {
+	list-style: none;
+}
+
+a {
+	color: inherit;
+	vertical-align: top;
+	text-decoration: none;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+img {
+	max-width: 100%;
+	vertical-align: top;
+}
+
+button {
+	border: none;
+	background-color: transparent;
+	color: inherit;
+	font-family: inherit;
+	outline: none;
+	cursor: pointer;
+}
+
+input,
+select,
+textarea {
+	border: none;
+	font: inherit;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+
+	&:focus {
+		outline: none;
+	}
+}
