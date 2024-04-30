@@ -1,7 +1,7 @@
 {
     "name": "gulp_5",
     "version": "1.0.0",
-    "description": "",
+    "description": "```\r npm install --global gulp-cli\r npm init\r npm install --save-dev gulp\r ```",
     "main": "index.js",
     "scripts": {
         "dev": "gulp",
@@ -14,6 +14,7 @@
         "@babel/core": "^7.24.4",
         "@babel/preset-env": "^7.24.4",
         "browser-sync": "^3.0.2",
+        "del": "^6.0.0",
         "gulp": "^5.0.0",
         "gulp-babel": "^8.0.0",
         "gulp-concat": "^2.6.1",
@@ -25,7 +26,10 @@
         "gulp-sourcemaps": "^3.0.0",
         "gulp-uglify": "^3.0.2",
         "gulp-watch": "^5.0.1",
-        "sass": "^1.75.0",
-        "del": "^6.0.0"
+        "sass": "^1.75.0"
+    },
+    "dependencies": {
+        "browser-sync": "^3.0.2",
+        "lottie-web": "^5.12.2"
     }
 }

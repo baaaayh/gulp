@@ -1,10 +1,11 @@
-const { series, parallel, watch, src, dest } = require('gulp'),
-    sass = require('gulp-sass')(require('sass')),
-    ejs = require('gulp-ejs'),
-    imagemin = require('gulp-imagemin'),
-    newer = require('gulp-newer'),
-    del = require('del'),
-    browserSync = require('browser-sync').create();
+const { series, parallel, watch, src, dest } = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+const ejs = require('gulp-ejs');
+const imagemin = require('gulp-imagemin');
+const newer = require('gulp-newer');
+const del = require('del');
+const browserSync = require('browser-sync').create();
+const babel = require('gulp-babel');
 
 /**
  * ? Config
@@ -61,9 +62,8 @@ function CompileCSS() {
                     // expanded ,compressed
                 }).on('error', sass.logError)
             )
-            .pipe(dest(CONFIG.deploy.ASSETS.STYLE));
-        resolve();
-        resolve();
+            .pipe(dest(CONFIG.deploy.ASSETS.STYLE))
+            .on('end', resolve); // 이벤트가 종료될 때만 resolve() 호출
     });
 }
 
@@ -104,7 +104,13 @@ function Library() {
  */
 function Script() {
     return new Promise((resolve) => {
-        src(CONFIG.workspace.ASSETS.SCRIPT + '/**/*').pipe(dest(CONFIG.deploy.ASSETS.SCRIPT));
+        src(CONFIG.workspace.ASSETS.SCRIPT + '/**/*')
+            .pipe(
+                babel({
+                    presets: ['@babel/preset-env'],
+                })
+            )
+            .pipe(dest(CONFIG.deploy.ASSETS.SCRIPT));
         resolve();
     });
 }
@@ -114,9 +120,9 @@ function Script() {
  */
 function Font() {
     return new Promise((resolve) => {
-        src(CONFIG.workspace.ASSETS.FONTS + '/**/*')
-            .pipe(newer(CONFIG.deploy.ASSETS.FONTS))
-            .pipe(dest(CONFIG.deploy.ASSETS.FONTS));
+        src(CONFIG.workspace.ASSETS.FONTS + '/**/*', { encoding: 'binary' })
+            .pipe(newer(CONFIG.deploy.ASSETS.FONTS, { encoding: 'binary' }))
+            .pipe(dest(CONFIG.deploy.ASSETS.FONTS, { encoding: 'binary' }));
         resolve();
     });
 }
@@ -142,6 +148,8 @@ function BrowserSync() {
                 index: openFile,
             },
             port: 8080,
+            cors: true,
+            online: true,
         });
         resolve();
     });
